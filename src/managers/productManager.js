@@ -106,14 +106,18 @@ export default class ProductManager{
                     id: id
                 }
 
+                const newProductFiles = products.map(p => {
+                    if (p.id === id) return prod;
+                    else return p;
+                })
+
+                await fs.promises.writeFile(this.path, JSON.stringify(newProductFiles))
+
+            } else {
+                console.log('Product not found')
             }
 
-            const newProductFiles = products.map(p => {
-                if (p.id === id) return prod;
-                else return p;
-            })
-
-            await fs.promises.writeFile(this.path, JSON.stringify(newProductFiles))
+            
     
         } catch (error) {
             console.log(error);
@@ -146,7 +150,6 @@ export default class ProductManager{
         typeof prod.title === "string" && 
         typeof prod.description === "string" && 
         typeof prod.price === "number" && 
-        typeof prod.thumbnail === "string" && 
         typeof prod.code === "string" && 
         typeof prod.stock === "number" &&
         typeof prod.category === "string" &&

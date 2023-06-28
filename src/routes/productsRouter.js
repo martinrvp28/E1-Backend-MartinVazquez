@@ -49,18 +49,21 @@ router.get('/:idProd', async (req,res)=> {
 
 })
 
-router.post('/', upload.single('thumbnail'), async (req, res, next) => {
+router.post('/', upload.array('thumbnail'), async (req, res, next) => {
     
     try {
 
-        const prod = req.body;
-        prod.stock = Number(prod.stock);
-        prod.price = Number(prod.price);
-        
+        const prod = {
+            ...req.body,
+            thumbnail: []
+        }    
+        prod.stock=Number(prod.stock);
+        prod.price=Number(prod.price);
 
-        if (req.file && req.file.path) {
-            prod.thumbnail = req.file.path;
-        }
+        const thumb = req.files;
+        if (thumb) thumb.forEach(f => prod.thumbnail.push(f.path));
+
+        console.log(prod);
         
         const newProduct = await productManager.addProduct(prod);
         res.json(newProduct);
@@ -78,6 +81,7 @@ router.put('/:id', async (req, res, next) => {
     try {
         const {id} = req.params;
         const newInfo = req.body;
+        console.log(newInfo);
     
         const updProduct = await productManager.updateProduct(Number(id),newInfo);
         res.json(updProduct);
