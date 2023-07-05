@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { __dirname } from '../../utils.js';
+import { __dirname } from '../utils.js';
 import ProductManager from "./productManager.js";
 
 const productManager = new ProductManager(__dirname + '/src/db/products.json');

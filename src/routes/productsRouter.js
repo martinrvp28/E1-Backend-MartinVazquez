@@ -1,11 +1,11 @@
 import { Router } from "express";
 import ProductManager from "../managers/productManager.js";
-import { __dirname } from "../../utils.js";
+import { __dirname } from "../utils.js";
 import {upload} from "../middlewares/multerThumbnail.js";
 
 const router = Router();
 
-const productManager = new ProductManager(__dirname + '/src/db/products.json');
+const productManager = new ProductManager(__dirname + '/db/products.json');
 
 router.get('/', async (req,res)=> {
 

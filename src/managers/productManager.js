@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { __dirname } from '../../utils.js';
+import { __dirname } from '../utils.js';
 const pathFile = __dirname + '/db/products.json';
 
 export default class ProductManager{
@@ -156,7 +156,6 @@ export default class ProductManager{
         prod.title &&
         prod.description &&
         prod.price &&
-        prod.thumbnail &&
         prod.code &&
         prod.stock &&
         prod.category
