@@ -1,6 +1,8 @@
 const socketClient = io();
 
-
+function deleteProduct(i) {
+    socketClient.emit('deleteProd', Number(i));
+}
 
 const form = document.getElementById('form');
 const inputTitle = document.getElementById('title');
@@ -39,6 +41,7 @@ socketClient.on('allProducts', (products) => {
             <p><span>Stock:</span> ${prod.stock}</p>
             <p><span>Categoria:</span> ${prod.category}</p>
             <p><span>ID:</span> ${prod.id}</p>
+            <button onClick="deleteProduct('${prod.id}')">BORRAR</button>
         </ul>`     
         });
     } else {
